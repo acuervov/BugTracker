@@ -1,9 +1,16 @@
 const express = require ('express'); 
 const app = express(); 
+const morgan = require('morgan')
+const connectDB = require('./database')
+
+connectDB(); 
 
 //setings
 app.set('port', 3001); 
+app.use(express.json()); 
+
 //Middlewares
+app.use(morgan('dev'))
 
 //Routes
 
