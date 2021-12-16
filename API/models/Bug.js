@@ -1,7 +1,8 @@
 const mongoose = require('mongoose'); 
 const {Schema} = mongoose; 
 
-const modeloProyecto = new Schema({
+const modeloBug = new Schema({
+    id: {type: Number, require: true},
     name:{type: String, required: true},
     description: {type: String, required: true},
     route: {type: String, required: false},
@@ -11,4 +12,4 @@ const modeloProyecto = new Schema({
     status: {type: String, required: true}
 })
 
-module.exports = mongoose.model('proyecto', modeloProyecto); 
+module.exports = mongoose.model('bug', modeloBug); 
