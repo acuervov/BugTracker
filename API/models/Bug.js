@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose; 
 
 const modeloBug = new Schema({
-    id: {type: Number, require: true},
     name:{type: String, required: true},
     description: {type: String, required: true},
     route: {type: String, required: false},
