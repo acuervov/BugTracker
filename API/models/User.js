@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 const modeloUsuario = new Schema({
+    id: {type: String, required: true},
     name:{type: String, required: true},
     mail:{type: String, required: true}, 
     image: {type: String, required: false},

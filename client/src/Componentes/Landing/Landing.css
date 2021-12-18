@@ -1,0 +1,46 @@
+@import url('https://fonts.google.com/specimen/Oswald#standard-styles');
+@import url('https://fonts.google.com/specimen/Fuzzy+Bubbles'); 
+
+.landing{
+    background-color: #F9EA05;
+    position: absolute; 
+    top: 0px;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+}
+
+.maintitle{
+   font-size: 200%; 
+   font-family: Oswald monospace;
+}
+
+.maindescription{
+    background-color: #F9EA05;
+    font-family: Fuzzy+Bubbles;
+    position: inherit;
+    top: 120px; 
+    border-radius: 20px;
+    margin: auto;
+    width: 45%;
+    font-size: 5px;
+}
+
+.login{
+    position: relative;
+    top: 260px; 
+    left: 700px;
+}
+
+@media(max-width: 990px){
+    .landing{
+        width: 100vw;
+    }
+    .maindescription{
+        width: 100%;
+    }
+    .login{
+        width: 100px;
+        left: 60px
+      }
+}

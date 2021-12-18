@@ -3,17 +3,18 @@ const router = Router();
 const user = require('../models/User') 
 
 
+router.get('/:id', (req,res)=> { // muestra usuario por params id
+    const id = req.params.id; 
+    user.findOne({'id': id})
+    .then(response => {res.json(response)
+    })
+})
+
 router.post('/', (req, res)=> { // agrega nuevo usuario
 const nuevoUser = new user(req.body)
 nuevoUser.save()
-.then(response=> res.send(response))
+.then(response=> res.json(response))
 .catch(err=>res.send(err))
-})
-
-router.get('/:id', (req,res)=> { // muestra usuario por params id
-    const id = req.params.id; 
-    user.findById(id)
-    .then(response => res.json(response))
 })
 
 router.put('/poner/:id', (req,res)=>{//agrega proyecto a la lista de proyectos del usuario

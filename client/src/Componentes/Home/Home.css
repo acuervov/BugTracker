@@ -1,0 +1,14 @@
+.cards-home{
+    display: grid;
+    margin-left: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+
+@media(max-width: 700px){
+    .cards-home{
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+}
