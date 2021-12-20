@@ -4,6 +4,7 @@ import Landing from './Componentes/Landing/Landing';
 import Home from './Componentes/Home/Home';
 import Proyecto from './Componentes/Proyecto/Proyecto';
 import Bug from './Componentes/Bug/Bug';
+import FormProyecto from './Componentes/FormProyecto/FormProyecto';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
        <Route exact path = '/' element={<Landing/>}/>
        <Route path = '/home' element={<Home/>}/>
        <Route path = '/proyecto/:id' element={<Proyecto/>}/>
+       <Route path = '/proyecto/form/:id/' element={<FormProyecto/>}/>
        <Route path = '/bug/:id' element={<Bug/>}/>
      </Routes>
     </div>

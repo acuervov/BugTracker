@@ -7,18 +7,19 @@ const initialState={
     Bugs:[],
 }
 
-export default function Reducer(state=initialState, action){
-    switch(action.type){
+export default function reducer(state=initialState, action){
+   switch(action.type){
         case ACCEPTED:
             return{
                 ...state,
                 access: true
             }
         case GET_USER_INFO:
-            return {
+            return{
                 ...state, 
-                user: action.payload
+                user: action.payload 
             }
         default: return state; 
     }
 }
+

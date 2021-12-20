@@ -11,6 +11,7 @@ router.get('/:id', (req,res)=> { // muestra usuario por params id
 })
 
 router.post('/', (req, res)=> { // agrega nuevo usuario
+    console.log("body post", req.body)
 const nuevoUser = new user(req.body)
 nuevoUser.save()
 .then(response=> res.json(response))

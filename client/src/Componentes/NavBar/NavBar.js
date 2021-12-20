@@ -10,7 +10,7 @@ export default function NavBar(){
     return (
             <Navbar bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand style={{fontSize: "30px"}} href="#home">Home</Navbar.Brand>
+                    <Navbar.Brand style={{fontSize: "30px"}} href="/home">Home</Navbar.Brand>
                         <Nav className="d-flex">
                             <Nav.Link style={{fontSize: "30px"}} className='perfil' href="#perfil">Usuario <FontAwesomeIcon icon={faUser}/></Nav.Link>
                         </Nav>
