@@ -15,9 +15,9 @@ function App() {
      <Routes>
        <Route exact path = '/' element={<Landing/>}/>
        <Route path = '/home' element={<RequireAuth><Home/></RequireAuth>}/>
-       <Route path = '/proyecto/:id' element={<Proyecto/>}/>
-       <Route path = '/proyecto/form/:id/' element={<FormProyecto/>}/>
-       <Route path = '/bug/:id' element={<Bug/>}/>
+       <Route path = '/proyecto/:id' element={<RequireAuth><Proyecto/></RequireAuth>}/>
+       <Route path = '/proyecto/form/:id/' element={<RequireAuth><FormProyecto/></RequireAuth>}/>
+       <Route path = '/bug/:id' element={<RequireAuth><Bug/></RequireAuth>}/>
      </Routes>
      </AuthProvider>
     </div>
