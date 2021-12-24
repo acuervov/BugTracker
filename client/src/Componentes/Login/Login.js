@@ -4,6 +4,8 @@ import {GoogleLogin} from 'react-google-login';
 import {useNavigate} from 'react-router'
 import { accepted, getUserInfo } from "../../Redux/Actions";
 import { useDispatch } from "react-redux";
+import { useAuth } from "../Auth/useAuth";
+
 
 
 export default function Login(){
@@ -11,10 +13,18 @@ export default function Login(){
     const navigate = useNavigate(); 
     const dispatch = useDispatch();
 
+    React.useEffect(()=>{
+        sessionStorage.removeItem('authed');
+        console.log("login",sessionStorage)
+    })
+
+    const {login} = useAuth();
+    const {authed} = useAuth(); 
+    const {logout} = useAuth(); 
+
     const responseGoogle = (response) => {
         if(!response.hasOwnProperty('error')){
-        dispatch(accepted())
-        console.log(response)
+        login()
         var body = {
             id: response.profileObj.googleId,
             name: response.profileObj.givenName,

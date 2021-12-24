@@ -8,21 +8,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from "react-router";
+import { useAuth } from "../Auth/useAuth";
 
 export default function Home(){
-    const access = useSelector(state => state.access)// cambiar a const cuando se acabe proceso de desarrollo
-    const [proyectos, setProyectos] = React.useState([])
+   
     const dispatch = useDispatch(); 
 
     const navigate = useNavigate()
+    const {authed} = useAuth(); 
+    console.log("home authed" , authed)
+ 
+    
 
     function handleAñadir(){
         navigate('/proyecto/form/0')
     }
 
     return (
-        <div>
-       {access?
         <div className="home">
             <NavBar/>
             <div className="botonAñadir"><Button variant="secondary" onClick={handleAñadir}>Añadir proyecto <FontAwesomeIcon icon={faPlus}/></Button></div>
@@ -35,8 +37,9 @@ export default function Home(){
                 <PCard/>
                 <PCard/>
             </div>
-        </div>:<NoLog/>
-        }
+            <button onClick={()=>{
+                navigate('/')
+            }}>logout</button>
         </div>
     )
 }
