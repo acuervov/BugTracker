@@ -1,2 +1,2 @@
 # BugTracker
-Still in process projects meant to be a Bug solving tracker for developers. 
+Still in process project meant to be a Bug solving tracker for developers. 
