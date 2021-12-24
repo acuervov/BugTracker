@@ -1,27 +1,30 @@
-import React from "react";
+import React, { useCallback } from "react";
 import NavBar from "../NavBar/NavBar";
 import './Home.css'
 import PCard from "../ProyectoCard/Pcard";
-import { useDispatch, useSelector } from "react-redux";
-import NoLog from "../NoLog/NoLog";
+import { useDispatch, useSelector} from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from 'react-bootstrap/Button'
-import { useNavigate } from "react-router";
-import { useAuth } from "../Auth/useAuth";
+import { useNavigate, useParams } from "react-router";
+import { getProyectos } from "../../Redux/Actions";
 
 export default function Home(){
    
+   
+    const {id} = useParams(); 
+    const navigate = useNavigate()
+    const proyectos = useSelector(state => state.proyectos)
     const dispatch = useDispatch(); 
 
-    const navigate = useNavigate()
-    const {authed} = useAuth(); 
-    console.log("home authed" , authed)
- 
-    
+   
+    React.useEffect(()=>{
+       if(proyectos.length===0) dispatch(getProyectos(id))
+    })
 
+ 
     function handleAñadir(){
-        navigate('/proyecto/form/0')
+        navigate('/proyecto/form/' + id + '/0')
     }
 
     return (
@@ -29,17 +32,8 @@ export default function Home(){
             <NavBar/>
             <div className="botonAñadir"><Button variant="secondary" onClick={handleAñadir}>Añadir proyecto <FontAwesomeIcon icon={faPlus}/></Button></div>
             <div className="cards-home">
-                <PCard/>
-                <PCard/>
-                <PCard/>
-                <PCard/>
-                <PCard/>
-                <PCard/>
-                <PCard/>
+                {proyectos.length > 0? proyectos.map(proyecto=> {return <PCard key= {proyecto._id} title ={proyecto.title} description = {proyecto.description}/>}): <span>No hay proyectos, crea uno</span>}
             </div>
-            <button onClick={()=>{
-                navigate('/')
-            }}>logout</button>
         </div>
     )
 }

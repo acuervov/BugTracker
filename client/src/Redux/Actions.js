@@ -1,10 +1,4 @@
-import { ACCEPTED, GET_USER_INFO, ADD_PROYECTO} from "./const";
-
-export function accepted(){
-    return function (dispatch){
-        dispatch({type: ACCEPTED})
-    }
-}
+import {GET_USER_INFO, ADD_PROYECTO, GET_PROYECTOS} from "./const";
 
 export function getUserInfo(body){
     return function (dispatch){
@@ -16,17 +10,16 @@ export function getUserInfo(body){
             if(response){dispatch({type: GET_USER_INFO, payload: response})}
             else {
                 fetch("http://localhost:3001/user/", {
-                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                    mode: 'cors', // no-cors, *cors, same-origin
-                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                    credentials: 'same-origin', // include, *same-origin, omit
+                    method: 'POST', 
+                    mode: 'cors', 
+                    cache: 'no-cache', 
+                    credentials: 'same-origin', 
                     headers: {
                       'Content-Type': 'application/json'
-                      // 'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    redirect: 'follow', // manual, *follow, error
-                    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                    body: JSON.stringify(body) // body data type must match "Content-Type" header
+                    redirect: 'follow', 
+                    referrerPolicy: 'no-referrer', 
+                    body: JSON.stringify(body)
                   })
                   .then(data => data.json())
                   .then(data => {dispatch({type: GET_USER_INFO, payload: data})})
@@ -35,8 +28,39 @@ export function getUserInfo(body){
     }
 }
 
-export function addProyecto(){
+export function addProyecto(body){
     return function (dispatch){
-        console.log("mierdita")
+        fetch("http://localhost:3001/proyecto/", {
+            method: 'POST', 
+            mode: 'cors', 
+            cache: 'no-cache', 
+            credentials: 'same-origin', 
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            redirect: 'follow', 
+            referrerPolicy: 'no-referrer', 
+            body: JSON.stringify(body)
+          })
+          .then(response => response.json())
+          .then(response => {if(response){
+            fetch(("http://localhost:3001/proyecto/" + body.userList[0]),{
+                method: "GET"
+            })
+            .then(respuesta => respuesta.json())
+            .then(respuesta => dispatch({type: ADD_PROYECTO, payload: respuesta}))
+          }})
+          .catch(error => alert(error))
+    }
+}
+
+export function getProyectos(id){
+    return function (dispatch){
+        console.log("entro en el action")
+        fetch(("http://localhost:3001/proyecto/" + id),{
+                method: "GET"
+            })
+            .then(respuesta => respuesta.json())
+            .then(respuesta => dispatch({type: GET_PROYECTOS, payload: respuesta}))
     }
 }

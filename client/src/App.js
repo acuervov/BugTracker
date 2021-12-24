@@ -14,10 +14,10 @@ function App() {
     <AuthProvider>
      <Routes>
        <Route exact path = '/' element={<Landing/>}/>
-       <Route path = '/home' element={<RequireAuth><Home/></RequireAuth>}/>
-       <Route path = '/proyecto/:id' element={<RequireAuth><Proyecto/></RequireAuth>}/>
-       <Route path = '/proyecto/form/:id/' element={<RequireAuth><FormProyecto/></RequireAuth>}/>
-       <Route path = '/bug/:id' element={<RequireAuth><Bug/></RequireAuth>}/>
+       <Route exact path = '/home/:id' element={<RequireAuth><Home/></RequireAuth>}/>
+       <Route exact path = '/proyecto/:id/:proyecto' element={<RequireAuth><Proyecto/></RequireAuth>}/>
+       <Route exact path = '/proyecto/form/:id/:proyecto' element={<RequireAuth><FormProyecto/></RequireAuth>}/>
+       <Route exact path = '/bug/:id/:bug' element={<RequireAuth><Bug/></RequireAuth>}/>
      </Routes>
      </AuthProvider>
     </div>

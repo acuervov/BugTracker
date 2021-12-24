@@ -2,17 +2,17 @@ const {Router} = require('express');
 const router = Router();
 const proyecto = require('../models/Proyect'); 
 
-
+ 
 router.post('/', (req, res)=> { // crea nuevo proyecto
 const nuevoProyecto = new proyecto(req.body)
 nuevoProyecto.save()
-.then(response=> res.send(response))
+.then(response=> res.json(response))
 .catch(err=>res.send(err))
 })
 
-router.get('/:id', (req,res)=> { // muestra proyecto buscado por id params
+router.get('/:id', (req,res)=> { // muestra proyectos buscado por id params
     const id = req.params.id; 
-    proyecto.findById(id)
+    proyecto.find({useList: id})
     .then(response => res.json(response))
 })
 

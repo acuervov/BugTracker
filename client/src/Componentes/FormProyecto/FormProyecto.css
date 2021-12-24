@@ -1,0 +1,7 @@
+.form-container{
+    width: 30%;
+    border: solid black;
+    position: relative; 
+    left: 35%; 
+    top: 20px;
+}

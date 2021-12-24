@@ -32,7 +32,7 @@ export default function Login(){
             image: response.profileObj.imageUrl
         }
         dispatch(getUserInfo(body))
-        navigate('/home') 
+        navigate('/home/' + body.id) 
         }
         else {alert("Ocurrio un problema al intentar iniciar sesion")}
       }
