@@ -12,10 +12,10 @@ nuevoBug.save()
 
 router.get('/:id', (req,res)=> { // muestra bug buscado por id params
     const id = req.params.id; 
-    bug.findById(id)
+    bug.find({proyecto: id})
     .then(response => res.json(response))
 })
-
+  
 router.put('/:id', (req,res)=>{ // modifica bug existente, hay que enviarle una copia de los datos del bug que incluya los cambios por body
     const id = req.params.id; 
     bug.findById(id)

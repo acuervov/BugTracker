@@ -32,7 +32,7 @@ export default function Home(){
             <NavBar/>
             <div className="botonAñadir"><Button variant="secondary" onClick={handleAñadir}>Añadir proyecto <FontAwesomeIcon icon={faPlus}/></Button></div>
             <div className="cards-home">
-                {proyectos.length > 0? proyectos.map(proyecto=> {return <PCard key= {proyecto._id} title ={proyecto.title} description = {proyecto.description}/>}): <span>No hay proyectos, crea uno</span>}
+                {proyectos.length > 0? proyectos.map(proyecto=> {return <PCard id={id} idP={proyecto._id} key = {proyecto._id} title ={proyecto.name} description = {proyecto.description}/>}): <span>No hay proyectos, crea uno</span>}
             </div>
         </div>
     )

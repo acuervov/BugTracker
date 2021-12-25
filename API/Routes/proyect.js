@@ -12,7 +12,7 @@ nuevoProyecto.save()
 
 router.get('/:id', (req,res)=> { // muestra proyectos buscado por id params
     const id = req.params.id; 
-    proyecto.find({useList: id})
+    proyecto.find({userList: [id]})
     .then(response => res.json(response))
 })
 

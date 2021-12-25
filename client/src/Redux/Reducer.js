@@ -1,9 +1,9 @@
-import {GET_USER_INFO, ADD_PROYECTO, GET_PROYECTOS} from "./const";
+import {GET_USER_INFO, ADD_PROYECTO, GET_PROYECTOS, GET_BUGS} from "./const";
 
 const initialState={
     user: {},
     proyectos:[],
-    Bugs:[],
+    bugs:[],
 }
 
 export default function reducer(state=initialState, action){
@@ -22,6 +22,11 @@ export default function reducer(state=initialState, action){
             return {
                 ...state, 
                 proyectos: action.payload,
+            }
+        case GET_BUGS:
+            return {
+                ...state,
+                bugs: action.payload,
             }
         default: return state; 
     }

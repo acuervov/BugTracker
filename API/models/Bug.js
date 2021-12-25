@@ -7,6 +7,7 @@ const modeloBug = new Schema({
     route: {type: String, required: false},
     severity: {type: String, required: true},
     date: {type: Date, require: false}, 
+    proyecto: {type: String, required: true},
     userList: {type: Array, required: false},
     status: {type: String, required: true}
 })

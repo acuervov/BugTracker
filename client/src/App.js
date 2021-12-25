@@ -7,6 +7,7 @@ import Bug from './Componentes/Bug/Bug';
 import FormProyecto from './Componentes/FormProyecto/FormProyecto';
 import { AuthProvider } from './Componentes/Auth/useAuth';
 import RequireAuth from './Componentes/Auth/RequireAuth';
+import FormBug from './Componentes/FormBug/FormBug'
 
 function App() {
   return (
@@ -15,9 +16,10 @@ function App() {
      <Routes>
        <Route exact path = '/' element={<Landing/>}/>
        <Route exact path = '/home/:id' element={<RequireAuth><Home/></RequireAuth>}/>
-       <Route exact path = '/proyecto/:id/:proyecto' element={<RequireAuth><Proyecto/></RequireAuth>}/>
-       <Route exact path = '/proyecto/form/:id/:proyecto' element={<RequireAuth><FormProyecto/></RequireAuth>}/>
-       <Route exact path = '/bug/:id/:bug' element={<RequireAuth><Bug/></RequireAuth>}/>
+       <Route exact path = '/proyecto/:id/:proyectoId' element={<RequireAuth><Proyecto/></RequireAuth>}/>
+       <Route exact path = '/proyecto/form/:id/:proyectoId' element={<RequireAuth><FormProyecto/></RequireAuth>}/>
+       <Route exact path = '/bug/form/:id/:proyectoId/:bugId' element={<RequireAuth><FormBug/></RequireAuth>}/>
+       <Route exact path = '/bug/:id/:proyectoId/:bugId' element={<RequireAuth><Bug/></RequireAuth>}/>
      </Routes>
      </AuthProvider>
     </div>

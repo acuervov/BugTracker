@@ -1,4 +1,4 @@
-import {GET_USER_INFO, ADD_PROYECTO, GET_PROYECTOS} from "./const";
+import {GET_USER_INFO, ADD_PROYECTO, GET_PROYECTOS, ADD_BUG, GET_BUGS} from "./const";
 
 export function getUserInfo(body){
     return function (dispatch){
@@ -62,5 +62,35 @@ export function getProyectos(id){
             })
             .then(respuesta => respuesta.json())
             .then(respuesta => dispatch({type: GET_PROYECTOS, payload: respuesta}))
+    }
+}
+
+export function addBug(body){
+    return function (dispatch){
+        fetch("http://localhost:3001/bug/", {
+            method: 'POST', 
+            mode: 'cors', 
+            cache: 'no-cache', 
+            credentials: 'same-origin', 
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            redirect: 'follow', 
+            referrerPolicy: 'no-referrer', 
+            body: JSON.stringify(body)
+          })
+        .then(response => response.json(response))
+        .then(response => {console.log(response); if(!response.hasOwnProperty('errors'))alert("Bug creado con exito")
+    else{alert(response.message)}})
+    }
+}
+
+export function getBugs(id){
+    return function(dispatch){
+        fetch(("http://localhost:3001/bug/" + id),{
+                method: "GET"
+            })
+            .then(respuesta => respuesta.json())
+            .then(respuesta => dispatch({type: GET_BUGS, payload: respuesta}))
     }
 }

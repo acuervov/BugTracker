@@ -3,12 +3,13 @@ import './FormProyecto.css'
 import NavBar from "../NavBar/NavBar";
 import Form from 'react-bootstrap/Form'; 
 import Button from 'react-bootstrap/Button'; 
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { addProyecto } from "../../Redux/Actions";
 
 export default function FormProyectoFormProyecto(){
     
+    const navigate = useNavigate(); 
     const {id} = useParams();
     const dispatch = useDispatch();
     const [proyecto, setProyecto] = React.useState({
@@ -19,6 +20,8 @@ export default function FormProyectoFormProyecto(){
 
     function onSubmit(){
         dispatch(addProyecto(proyecto))
+        navigate('/home/' + id)
+
     }
 
     console.log(proyecto)
