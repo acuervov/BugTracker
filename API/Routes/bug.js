@@ -18,8 +18,8 @@ router.get('/:id', (req,res)=> { // muestra bug buscado por id params
   
 router.put('/:id', (req,res)=>{ // modifica bug existente, hay que enviarle una copia de los datos del bug que incluya los cambios por body
     const id = req.params.id; 
-    bug.findById(id)
-    .then(response => response.update(req.body))
+    bug.updateOne({_id: id}, req.body)
+    .then(response => response.save())
     .then(response => res.json(response))
     .catch(err => res.send(err))
 })

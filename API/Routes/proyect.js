@@ -18,8 +18,8 @@ router.get('/:id', (req,res)=> { // muestra proyectos buscado por id params
 
 router.put('/:id', (req,res)=>{ // modifica proyecto existente, incluso modifica la lista de integrantes, hay que enviarle una copia de los datos del proyecto que incluya los cambios por body
     const id = req.params.id; 
-    proyecto.findById(id)
-    .then(response => response.update(req.body))
+    proyecto.updateOne({_id: id}, req.body)
+    .then(response => response.save())
     .then(response => res.json(response))
     .catch(err => res.send(err))
 })

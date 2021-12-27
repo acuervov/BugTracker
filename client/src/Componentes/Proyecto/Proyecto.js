@@ -26,11 +26,15 @@ export default function Proyecto(){
         setBugs(bugs1)
     }, [bugs1])
     
-    console.log(proyecto)
+    console.log(bugs)
     const navigate = useNavigate()
 
     function handleAdd(){
         navigate('/bug/form/' + id + '/' + proyectoId + '/0')
+    }
+
+    function handleEdit(){
+        navigate('/proyecto/form/' + id + '/' + proyectoId)
     }
     return (
         <div className="proyecto">
@@ -46,8 +50,12 @@ export default function Proyecto(){
             <h1>{proyecto.name}</h1>
             <div className="cards-proyecto">
              {bugs.length > 0? bugs.map(bug => {
-                 return <BCard name = {bug.name} description = {bug.description} route = {bug.route} status = {bug.status} date = {bug.date}/>
+                 return <BCard Bid = {bug._id} key = {bug._id} name = {bug.name} description = {bug.description} route = {bug.route} status = {bug.status} date = {bug.date}/>
              }): <span>No hay bugs en este proyecto aún</span>}
+            </div>
+            <div className='botones'>
+                <Button id='editar' variant="info" onClick={handleEdit}>Editar</Button>
+                <Button id='eliminar' variant="danger">Eliminar</Button>
             </div>
         </div>
     )

@@ -94,3 +94,23 @@ export function getBugs(id){
             .then(respuesta => dispatch({type: GET_BUGS, payload: respuesta}))
     }
 }
+
+export function editProyecto(body){
+    console.log("body", body)
+    return function (dispatch){
+        fetch(("http://localhost:3001/proyecto/"+ body._id), {
+            method: 'PUT', 
+            mode: 'cors', 
+            cache: 'no-cache', 
+            credentials: 'same-origin', 
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            redirect: 'follow', 
+            referrerPolicy: 'no-referrer', 
+            body: JSON.stringify(body)
+          })
+        .then(response => response.json())
+        .then(response => console.log("edit: ", response))
+    }
+}

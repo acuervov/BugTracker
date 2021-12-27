@@ -11,6 +11,13 @@
     padding: 10px;
     width: 200px; 
 }
+.botones{
+    position: relative; 
+    bottom: -10px; 
+}
+#editar{
+margin: 10px;
+}
 
 @media(max-width: 700px){
     .cards-proyecto{

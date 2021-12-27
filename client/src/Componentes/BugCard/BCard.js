@@ -2,8 +2,9 @@ import React from "react";
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import './Bcard.css'
+import {useNavigate, useParams} from 'react-router'
 
-export default function BCard({name, description, date, status, route}){
+export default function BCard({name, description, date, status, route, Bid}){
     
     function color(){
         switch(status){
@@ -15,6 +16,14 @@ export default function BCard({name, description, date, status, route}){
                 return "success"
         }
     }
+    const navigate = useNavigate(); 
+    
+    const {id} = useParams(); 
+    const {proyectoId} = useParams();
+
+    function handleDetail(){
+        navigate('/bug/'+ id +'/'+ proyectoId+ '/' + Bid)
+    }
     return (
         <Card className="card" bg={color()}>
             <Card.Header>{name}</Card.Header>
@@ -25,8 +34,8 @@ export default function BCard({name, description, date, status, route}){
                 </Card.Text>
                 <Card.Text style={{textAlign: "left"}}>Ruta: {route}</Card.Text>
                 <Card.Text style={{textAlign: "left"}}>Fecha: {date}</Card.Text>
-                <Button variant="primary">Detalle</Button>
+                <Button variant="primary" onClick={handleDetail}>Detalle</Button>
             </Card.Body>
-      </Card>
+        </Card>
     )
 }
