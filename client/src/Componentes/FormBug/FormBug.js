@@ -4,16 +4,17 @@ import NavBar from "../NavBar/NavBar";
 import Form from 'react-bootstrap/Form'; 
 import Button from 'react-bootstrap/Button'; 
 import { useParams } from "react-router";
-import { useDispatch } from "react-redux";
-import { addBug } from "../../Redux/Actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addBug, editBug} from "../../Redux/Actions";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {useNavigate} from 'react-router'
 
-export default function FormProyectoFormProyecto(){
+export default function FormBug(){
     
     const {proyectoId} = useParams();
     const {id} = useParams();
+    const {bugId} = useParams(); 
     const dispatch = useDispatch();
 
     const navigate = useNavigate()
@@ -33,6 +34,29 @@ export default function FormProyectoFormProyecto(){
         dispatch(addBug(bug))
         navigate('/proyecto/' + id + "/" + proyectoId)
     }
+
+    function handleEdit(){
+        dispatch(editBug(bug))
+        navigate('/proyecto/' + id + "/" + proyectoId)
+    }
+
+    const bugInfo = useSelector(state => state.bugs.find(bug => bug._id === bugId))
+    
+    React.useEffect(()=>{
+        console.log("entro effect")
+        if(parseInt(bugId)){
+            setBug({...bug, 
+                name: bugInfo.name, 
+                description: bugInfo.description,
+                route: bugInfo.route,
+                severity: bugInfo.severity,
+                date: new Date(bugInfo.date),
+                status: bugInfo.status,
+                _id: bugId
+            }) 
+        }
+    },[1])
+
     return (
         <div>
             <NavBar/>
@@ -70,7 +94,7 @@ export default function FormProyectoFormProyecto(){
                             <option value="3">Resuelto</option>
                         </Form.Select>
                     </Form.Group>
-                    <Button variant='dark' onClick={handleSubmit}>Crear</Button>
+                    {parseInt(bugId)? <Button variant='dark' onClick={handleEdit}>Editar</Button>:<Button variant='dark' onClick={handleSubmit}>Crear</Button>}
                 </Form>
             </div>
         </div>

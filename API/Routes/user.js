@@ -3,6 +3,13 @@ const router = Router();
 const user = require('../models/User') 
 
 
+router.get('/name-:name', (req,res)=> { // muestra usuario por params id
+    const name = req.params.name; 
+    const regex = new RegExp(name, 'i') // i for case insensitive
+    user.find({name: {$regex: regex}})    
+    .then(response => {res.json(response)})
+})
+
 router.get('/:id', (req,res)=> { // muestra usuario por params id
     const id = req.params.id; 
     user.findOne({'id': id})

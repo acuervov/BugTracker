@@ -7,7 +7,7 @@ import {useNavigate, useParams} from 'react-router';
 import Button from 'react-bootstrap/Button'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { getBugs } from "../../Redux/Actions";
+import { deleteBug, deleteProyecto, getBugs } from "../../Redux/Actions";
 
 export default function Proyecto(){
 
@@ -36,6 +36,13 @@ export default function Proyecto(){
     function handleEdit(){
         navigate('/proyecto/form/' + id + '/' + proyectoId)
     }
+    
+    function handleDelete(){
+        bugs1.map(bug => {dispatch(deleteBug(bug._id))})
+        dispatch(deleteProyecto(proyectoId));
+        navigate('/home/' + id); 
+    }
+
     return (
         <div className="proyecto">
             <NavBar/>
@@ -55,7 +62,7 @@ export default function Proyecto(){
             </div>
             <div className='botones'>
                 <Button id='editar' variant="info" onClick={handleEdit}>Editar</Button>
-                <Button id='eliminar' variant="danger">Eliminar</Button>
+                <Button id='eliminar' variant="danger" onClick={handleDelete}>Eliminar</Button>
             </div>
         </div>
     )

@@ -15,7 +15,7 @@ export default function NavBar(){
 
     React.useEffect(()=>{
         dispatch(getUserInfo({id: id}))
-    })
+    }, [1])
     return (
             <Navbar bg="dark" variant="dark">
                 <Container>

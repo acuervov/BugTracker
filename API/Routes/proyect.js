@@ -6,13 +6,13 @@ const proyecto = require('../models/Proyect');
 router.post('/', (req, res)=> { // crea nuevo proyecto
 const nuevoProyecto = new proyecto(req.body)
 nuevoProyecto.save()
-.then(response=> res.json(response))
+.then(response => res.json(response))
 .catch(err=>res.send(err))
 })
 
 router.get('/:id', (req,res)=> { // muestra proyectos buscado por id params
     const id = req.params.id; 
-    proyecto.find({userList: [id]})
+    proyecto.find({userList: id})
     .then(response => res.json(response))
 })
 
@@ -39,6 +39,7 @@ router.put('/poner/:id', (req,res)=>{//agrega bug a la lista de bugs del proyect
     .then(response => res.json(response))
     .catch(err => res.send(err))
 })
+
 router.put('/quitar/:id', (req,res)=>{//quitar bug de la lista de bugs del proyecto
     const id = req.params.id; 
     proyecto.findOneAndUpdate(
@@ -53,6 +54,12 @@ router.put('/quitar/:id', (req,res)=>{//quitar bug de la lista de bugs del proye
     )
     .then(response => res.json(response))
     .catch(err => res.send(err))
+})
+
+router.delete('/:id',(req, res)=>{
+    const id = req.params.id; 
+    proyecto.deleteOne({_id: id})
+    .then(response => res.send(response))
 })
 
 module.exports = router; 

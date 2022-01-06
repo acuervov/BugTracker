@@ -1,4 +1,4 @@
-import {GET_USER_INFO, ADD_PROYECTO, GET_PROYECTOS, ADD_BUG, GET_BUGS} from "./const";
+import {GET_USER_INFO, ADD_PROYECTO, GET_PROYECTOS, ADD_BUG, GET_BUGS, SEARCH_USER_NAME} from "./const";
 
 export function getUserInfo(body){
     return function (dispatch){
@@ -43,13 +43,7 @@ export function addProyecto(body){
             body: JSON.stringify(body)
           })
           .then(response => response.json())
-          .then(response => {if(response){
-            fetch(("http://localhost:3001/proyecto/" + body.userList[0]),{
-                method: "GET"
-            })
-            .then(respuesta => respuesta.json())
-            .then(respuesta => dispatch({type: ADD_PROYECTO, payload: respuesta}))
-          }})
+          .then(response => alert(response))
           .catch(error => alert(error))
     }
 }
@@ -96,7 +90,6 @@ export function getBugs(id){
 }
 
 export function editProyecto(body){
-    console.log("body", body)
     return function (dispatch){
         fetch(("http://localhost:3001/proyecto/"+ body._id), {
             method: 'PUT', 
@@ -113,4 +106,67 @@ export function editProyecto(body){
         .then(response => response.json())
         .then(response => console.log("edit: ", response))
     }
+}
+
+export function editBug(body){
+    return function(dispatch){
+        fetch(("http://localhost:3001/bug/"+ body._id), {
+            method: 'PUT', 
+            mode: 'cors', 
+            cache: 'no-cache', 
+            credentials: 'same-origin', 
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            redirect: 'follow', 
+            referrerPolicy: 'no-referrer', 
+            body: JSON.stringify(body)
+          })
+        .then(response => response.json())
+        .then(response => console.log("edit: ", response))
+    }
+}
+
+export function deleteBug(id){
+  return function(dispatch){
+    fetch(("http://localhost:3001/bug/"+ id), {
+            method: 'DELETE', 
+            mode: 'cors', 
+            cache: 'no-cache', 
+            credentials: 'same-origin', 
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            redirect: 'follow', 
+            referrerPolicy: 'no-referrer', 
+          }) 
+    .then(response => console.log("delete: ",response))
+  }
+}
+
+export function deleteProyecto(id){
+  return function (dispatch){
+    fetch(("http://localhost:3001/proyecto/"+ id), {
+      method: 'DELETE', 
+      mode: 'cors', 
+      cache: 'no-cache', 
+      credentials: 'same-origin', 
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      redirect: 'follow', 
+      referrerPolicy: 'no-referrer', 
+    }) 
+    .then(response => console.log("delete: ",response))
+  }
+}
+
+export function searchUserName(name){
+  return function (dispatch){
+    fetch(("http://localhost:3001/user/name-" + name),{
+            method: "GET"
+        })
+    .then(response => response.json())
+    .then(response => dispatch({type: SEARCH_USER_NAME, payload: response}))
+  }
 }

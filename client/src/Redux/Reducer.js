@@ -1,9 +1,10 @@
-import {GET_USER_INFO, ADD_PROYECTO, GET_PROYECTOS, GET_BUGS} from "./const";
+import {GET_USER_INFO, ADD_PROYECTO, GET_PROYECTOS, GET_BUGS, SEARCH_USER_NAME} from "./const";
 
 const initialState={
     user: {},
     proyectos:[],
     bugs:[],
+    userSearch: []
 }
 
 export default function reducer(state=initialState, action){
@@ -27,6 +28,11 @@ export default function reducer(state=initialState, action){
             return {
                 ...state,
                 bugs: action.payload,
+            }
+        case SEARCH_USER_NAME:
+            return {
+                ...state, 
+                userSearch: action.payload,
             }
         default: return state; 
     }

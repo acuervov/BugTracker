@@ -28,11 +28,16 @@ router.get('/encargado-:encargado/status-:status', async (req, res)=> {
    var resultado = await bug.find(); 
    const encargado = req.params.encargado; 
    const status = req.params.status; 
-   console.log(resultado)
 
        if(encargado !== 'null'){resultado = resultado.filter(bug => {return bug.userList.includes(encargado)})}
        if(status !== 'null'){resultado = resultado.filter(bug => {return bug.status === status})}
        res.json(resultado)
+})
+
+router.delete('/:id',(req, res)=>{
+    const id = req.params.id; 
+    bug.deleteOne({_id: id})
+    .then(response => res.send(response))
 })
 
 
